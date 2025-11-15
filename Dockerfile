@@ -14,6 +14,7 @@ RUN apk add --no-cache wget
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/src ./src
 COPY --from=builder /app/typeorm.config.ts ./typeorm.config.ts
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 # Instalar ts-node y tsconfig-paths para migraciones
