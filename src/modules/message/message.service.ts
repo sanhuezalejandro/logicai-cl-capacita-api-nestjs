@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Message } from '../../core/database/entities';
@@ -27,6 +27,10 @@ export class MessageService {
   }
 
   async remove(id: number): Promise<void> {
+    const message = await this.messageRepository.findOne({ where: { id } });
+    if (!message) {
+      throw new NotFoundException(`Mensaje con ID ${id} no encontrado`);
+    }
     await this.messageRepository.delete(id);
   }
 }
