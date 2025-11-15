@@ -45,6 +45,10 @@ services:
       retries: 3
       start_period: 40s
     command: sh -c "npm run migration:run && node dist/src/main.js"
+    labels:
+      - "coolify.managed=true"
+      - "coolify.type=application"
+      - "coolify.name=nestjs-api"
 
 volumes:
   postgres_data:
