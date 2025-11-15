@@ -25,4 +25,8 @@ export class MessageService {
   async findOne(id: number): Promise<Message | null> {
     return this.messageRepository.findOne({ where: { id } });
   }
+
+  async remove(id: number): Promise<void> {
+    await this.messageRepository.delete(id);
+  }
 }
