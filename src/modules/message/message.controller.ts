@@ -50,7 +50,8 @@ export class MessageController {
     description: 'Mensaje eliminado exitosamente',
   })
   @ApiResponse({ status: 404, description: 'Mensaje no encontrado' })
-  remove(@Param('id') id: string): Promise<void> {
-    return this.messageService.remove(+id);
+  async remove(@Param('id') id: string): Promise<{ message: string }> {
+    await this.messageService.remove(+id);
+    return { message: 'Mensaje eliminado exitosamente' };
   }
 }
