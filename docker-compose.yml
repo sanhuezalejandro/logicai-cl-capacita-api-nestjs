@@ -39,16 +39,18 @@ services:
       postgres:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
     command: sh -c "npm run migration:run && node dist/src/main.js"
     labels:
       - "coolify.managed=true"
       - "coolify.type=application"
       - "coolify.name=nestjs-api"
+    expose:
+      - "3000"
 
 volumes:
   postgres_data:
