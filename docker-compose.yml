@@ -1,24 +1,6 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16-alpine
-    container_name: nestjs-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${DB_DATABASE:-nestdb}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT:-5432}:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   api:
     build:
       context: .
@@ -30,15 +12,12 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: ${PORT:-3000}
-      DB_HOST: postgres
-      DB_PORT: 5432
+      DB_HOST: ${DB_HOST:-wcg00k0gkk0kc4kco0s880o4}
+      DB_PORT: ${DB_PORT:-5432}
       DB_USERNAME: ${DB_USERNAME:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-postgres}
-      DB_DATABASE: ${DB_DATABASE:-nestdb}
+      DB_PASSWORD: ${DB_PASSWORD:-hUVuI9ubWTO2lIIaKyYaWCN9p6TcCMEGj41i0NBIHRUAPrcXxDLT523LBffPmRXq}
+      DB_DATABASE: ${DB_DATABASE:-postgres}
       CORS_ORIGINS: http://localhost:4200,https://capacita.logicaisolutions.com
-    depends_on:
-      postgres:
-        condition: service_healthy
     command: sh -c "npm run migration:run && node dist/src/main.js"
     labels:
       - "coolify.managed=true"
@@ -47,7 +26,4 @@ services:
     expose:
       - "3000"
 
-volumes:
-  postgres_data:
-    driver: local
 
