@@ -12,7 +12,7 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: ${PORT:-3000}
-      DB_HOST: ${DB_HOST:-wcg00k0gkk0kc4kco0s880o4}
+      DB_HOST: ${DB_HOST:-postgres-database-capacita}
       DB_PORT: ${DB_PORT:-5432}
       DB_USERNAME: ${DB_USERNAME:-postgres}
       DB_PASSWORD: ${DB_PASSWORD:-hUVuI9ubWTO2lIIaKyYaWCN9p6TcCMEGj41i0NBIHRUAPrcXxDLT523LBffPmRXq}
