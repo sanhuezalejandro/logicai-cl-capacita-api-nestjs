@@ -2,9 +2,11 @@
 FROM node:22-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+# Instalar todas las dependencias (incluyendo devDependencies para el build)
+RUN npm ci --include=dev
 COPY . .
-RUN npm run build
+# Verificar que nest CLI esté disponible y hacer build
+RUN npx nest build
 
 # Stage 2: Production
 FROM node:22-alpine
