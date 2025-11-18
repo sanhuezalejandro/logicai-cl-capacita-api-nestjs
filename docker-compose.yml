@@ -12,10 +12,10 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       PORT: ${PORT:-3000}
-      DB_HOST: ${DB_HOST:-postgres-database-capacita}
+      DB_HOST: ${DB_HOST:-zscs4ssg44g8c8w48c8ogkk4}
       DB_PORT: ${DB_PORT:-5432}
       DB_USERNAME: ${DB_USERNAME:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-hUVuI9ubWTO2lIIaKyYaWCN9p6TcCMEGj41i0NBIHRUAPrcXxDLT523LBffPmRXq}
+      DB_PASSWORD: ${DB_PASSWORD:-BcEmJburVzsU2epJuhvjg600533cHd9ZLRJdCztvlxlmBUXWO6V5BFIdIxsJ8AGL}
       DB_DATABASE: ${DB_DATABASE:-postgres}
       CORS_ORIGINS: http://localhost:4200,https://capacita.logicaisolutions.com
     command: sh -c "npm run migration:run && node dist/src/main.js"
@@ -23,7 +23,14 @@ services:
       - "coolify.managed=true"
       - "coolify.type=application"
       - "coolify.name=nestjs-api"
+    networks:
+      - coolify
     expose:
       - "3000"
+
+networks:
+  coolify:
+    external: true
+    name: coolify
 
 
